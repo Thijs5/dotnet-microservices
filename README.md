@@ -2,9 +2,12 @@
 Trying to setup multiple connected microservices. All commands noted below are executed in the root project directory.
 
 ## Overview
+
+![Services overview](./assets/readme/services.png "Services overview")
+
 | Service | URL |
 | ------- | --- |
-| [Users API](#users-api) | [https://localhost:5001/swagger/index.html](https://localhost:5001/swagger/index.html) |
+| [Users API](#users-api) | [https://localhost:5001/swagger/index.html](https://localhost:5001/swagger/index.html) <br/> [http://localhost:50010/swagger/index.html](http://localhost:50010/swagger/index.html) |
 
 <a id="#users-api"></a>
 ## Users API
