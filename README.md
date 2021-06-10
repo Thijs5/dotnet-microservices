@@ -67,7 +67,7 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p Password
 ```
 
 <a id="#docker-webapi"></a>
-#### Users API
+#### Users API ([2eed146](https://github.com/Thijs5/dotnet-microservices/commit/2eed1461086a4ba56625769647a155a1ab2cacbc))
 The first step is creating a `Dockerfile`. This is easy using Visual Studio Code. Use the `Add Dockerfile to Workspace`-command to start the wizard. Because the Users API is the only thing running in this container, we map the ports the the default http (80) and https (443) ports.
 
 Verify the image by building and running it.
