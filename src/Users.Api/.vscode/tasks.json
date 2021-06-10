@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/Users.Api/Users.Api.csproj",
+                "${workspaceFolder}/Users.Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/Users.Api/Users.Api.csproj",
+                "${workspaceFolder}/Users.Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/src/Users.Api/Users.Api.csproj",
+                "${workspaceFolder}/Users.Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -45,14 +45,14 @@
                 "build"
             ],
             "dockerBuild": {
-                "tag": "dotnetmicroservices:dev",
+                "tag": "usersapi:dev",
                 "target": "base",
-                "dockerfile": "${workspaceFolder}/src/Users.Api/Dockerfile",
+                "dockerfile": "${workspaceFolder}/Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/src/Users.Api/Users.Api.csproj"
+                "appProject": "${workspaceFolder}/Users.Api.csproj"
             }
         },
         {
@@ -62,13 +62,13 @@
                 "build"
             ],
             "dockerBuild": {
-                "tag": "dotnetmicroservices:latest",
-                "dockerfile": "${workspaceFolder}/src/Users.Api/Dockerfile",
+                "tag": "usersapi:latest",
+                "dockerfile": "${workspaceFolder}/Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/src/Users.Api/Users.Api.csproj"
+                "appProject": "${workspaceFolder}/Users.Api.csproj"
             }
         },
         {
@@ -79,7 +79,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/src/Users.Api/Users.Api.csproj",
+                "appProject": "${workspaceFolder}/Users.Api.csproj",
                 "enableDebugging": true
             }
         },
@@ -91,7 +91,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/src/Users.Api/Users.Api.csproj"
+                "appProject": "${workspaceFolder}/Users.Api.csproj"
             }
         }
     ]

@@ -15,7 +15,7 @@ namespace Users.Api
 
         private static void ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("SqlConnection");
+            var connectionString = configuration["SQL_CONNECTION_STRING"];
             services.AddDbContext<UsersDbContext>(options => options.UseSqlServer(connectionString));
         }
     }
