@@ -30,3 +30,7 @@ services:
     environment:
       - SA_PASSWORD=yourStrong(!)Password
       - ACCEPT_EULA=Y
+    volumes:
+      - ./data/Users.Api/data:/var/opt/mssql/data
+      - ./data/Users.Api/log:/var/opt/mssql/log
+      - ./data/Users.Api/secrets:/var/opt/mssql/secrets

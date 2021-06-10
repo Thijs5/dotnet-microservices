@@ -81,3 +81,5 @@ Debugging is possible using a new Visual Studio Code configuration. Since the AP
 To let the Users API communicate with SQL Server, we also need to create a container. By quickly adding some lines in the `docker-compose.yml` we have a container ready ([commit 69db2c4](https://github.com/Thijs5/dotnet-microservices/commit/69db2c4d1c1e02c09edf1350700544edcc9d577a)).
 
 Normally the EF migrations run on startup. Because of the Docker setup, it is possible the SQL container isn't ready yet at the moment the API setups. To fix this quick and dirty, I've added a migration controller. By using this controller it is possible to migrate the database manually ([commit 8fbcd38](https://github.com/Thijs5/dotnet-microservices/commit/8fbcd38191ba0f2db74e50371739081d05c1c3a2)).
+
+At this point we have a working SQL container. There is only one problem with it. If the container gets deleted, we lose all our data. To counter this, we will mount a volume to the container. This was the data will get saved on our host machine in stead of the container.
