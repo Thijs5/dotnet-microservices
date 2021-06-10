@@ -80,4 +80,4 @@ Debugging is possible using a new Visual Studio Code configuration. Since the AP
 
 <a id="#docker-sqlserver"></a>
 #### SQL Server
-To let the Users API communicate with SQL Server, we also need to create a container. By quickly adding some lines in the `docker-compose.yml` we have a container ready.
+To let the Users API communicate with SQL Server, we also need to create a container. By quickly adding some lines in the `docker-compose.yml` we have a container ready ([69db2c4](https://github.com/Thijs5/dotnet-microservices/commit/69db2c4d1c1e02c09edf1350700544edcc9d577a)).
