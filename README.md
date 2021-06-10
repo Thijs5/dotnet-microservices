@@ -5,6 +5,7 @@ Trying to setup multiple connected microservices. All commands noted below are e
 - [Fetching and updating data using Entity Framework](#entity-framework)
 - Docker
     - [WebApi](#docker-webapi)
+    - [SQL Server](#docker-sqlserver)
 
 ## Overview
 
@@ -76,3 +77,7 @@ docker-compose build
 docker-compose up
 ```
 Debugging is possible using a new Visual Studio Code configuration. Since the API is running in Docker, it is impossible to access the local SQL Server so no request will currently succeed. The only way forward is Dockerize the SQL Server.
+
+<a id="#docker-sqlserver"></a>
+#### SQL Server
+To let the Users API communicate with SQL Server, we also need to create a container. By quickly adding some lines in the `docker-compose.yml` we have a container ready.
