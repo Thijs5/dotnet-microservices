@@ -21,7 +21,8 @@ namespace Users.Api
         {
             services.AddControllers(options => options.OutputFormatters.RemoveType<StringOutputFormatter>());
             services.ConfigureSwagger();
-            services.AddApplicationServices();
+            services.ConfigureServices(Configuration);
+            services.AddMappers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

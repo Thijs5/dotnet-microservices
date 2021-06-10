@@ -2,20 +2,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Users.Api.Models
 {
-    public class User
+    public class NewUser
     {
-        /// <summary>
-        /// Unique id of the user.
-        /// </summary>
-        /// <value></value>
-        [Required]
-        public int Id { get; init; }
-
         /// <summary>
         /// First name.
         /// </summary>
         /// <value></value>
         [Required]
+        [MaxLength(255)]
         public string FirstName { get; init; } = string.Empty;
 
         /// <summary>
@@ -23,6 +17,7 @@ namespace Users.Api.Models
         /// </summary>
         /// <value></value>
         [Required]
+        [MaxLength(255)]
         public string FamilyName { get; init; } = string.Empty;
     }
 }
