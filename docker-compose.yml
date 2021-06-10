@@ -13,7 +13,7 @@ services:
       - 50010:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - SQL_CONNECTION_STRING=Server=users-db,5002;Database=UsersDb;User Id=sa;Password=yourStrong(!)Password
+      - SQL_CONNECTION_STRING=Server=users-db;Database=UsersDb;User Id=sa;Password=yourStrong(!)Password
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=5001
       - ASPNETCORE_Kestrel__Certificates__Default__Password=Password
@@ -26,7 +26,7 @@ services:
   users-db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     ports:
-      - 5002:1433
+      - 1433:1433
     environment:
       - SA_PASSWORD=yourStrong(!)Password
       - ACCEPT_EULA=Y

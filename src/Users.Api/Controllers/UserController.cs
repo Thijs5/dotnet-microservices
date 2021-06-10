@@ -114,7 +114,7 @@ namespace Users.Api.Controllers
         [HttpDelete]
         [Route("/users/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
-        public async Task<ActionResult<User>> Delete(int userId, CancellationToken cancellationToken)
+        public async Task<ActionResult<User>> DeleteAsync(int userId, CancellationToken cancellationToken = default)
         {
             var user = _context.Users.SingleOrDefault(u => u.Id == userId);
             if (user != null)

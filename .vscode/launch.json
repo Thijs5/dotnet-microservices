@@ -1,6 +1,15 @@
 {
     "version": "0.2.0",
     "configurations": [
+    {
+        "name": "Docker Attach",
+        "type": "docker",
+        "request": "attach",
+        "platform": "netCore",
+        "sourceFileMap": {
+            "/src": "${workspaceFolder}"
+        }
+    },
         {
             "name": "Users Api",
             "type": "coreclr",

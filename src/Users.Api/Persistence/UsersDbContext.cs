@@ -11,5 +11,12 @@ namespace Users.Api.Persistence
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, FirstName = "Thijs", LastName = "Dickmans" }
+            );
+        }
     }
 }
