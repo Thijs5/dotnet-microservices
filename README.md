@@ -82,4 +82,4 @@ To let the Users API communicate with SQL Server, we also need to create a conta
 
 Normally the EF migrations run on startup. Because of the Docker setup, it is possible the SQL container isn't ready yet at the moment the API setups. To fix this quick and dirty, I've added a migration controller. By using this controller it is possible to migrate the database manually ([commit 8fbcd38](https://github.com/Thijs5/dotnet-microservices/commit/8fbcd38191ba0f2db74e50371739081d05c1c3a2)).
 
-At this point we have a working SQL container. There is only one problem with it. If the container gets deleted, we lose all our data. To counter this, we will mount a volume to the container. This was the data will get saved on our host machine in stead of the container.
+At this point we have a working SQL container. There is only one problem with it. If the container gets deleted, we lose all our data. To counter this, we will mount a volume to the container. This was the data will get saved on our host machine in stead of the container ([commit 8abf5ca](https://github.com/Thijs5/dotnet-microservices/commit/8abf5ca9d11551e429715fafda5e2667d10756b2)).
