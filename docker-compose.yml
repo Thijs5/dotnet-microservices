@@ -20,7 +20,6 @@ services:
       - ${HOME}/.aspnet/https/aspnetapp.pfx:/app/https/aspnetapp.pfx:ro
     depends_on:
       - users-db
-  
   users-db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     ports:
@@ -52,7 +51,6 @@ services:
       - ${HOME}/.aspnet/https/aspnetapp.pfx:/app/https/aspnetapp.pfx:ro
     depends_on:
       - projects-db
-
   projects-db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     ports:
@@ -64,3 +62,34 @@ services:
       - ./data/Projects.Api/data:/var/opt/mssql/data
       - ./data/Projects.Api/log:/var/opt/mssql/log
       - ./data/Projects.Api/secrets:/var/opt/mssql/secrets
+
+  time-entries-api:
+    image: time-entries-api
+    build:
+      context: .
+      dockerfile: src/TimeEntries.Api/Dockerfile
+    ports:
+      - 53100:80
+      - 53101:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - SQLCONNSTR_DEFAULT=Server=time-entries-db;Database=TimeEntriesDb;User Id=sa;Password=yourStrong(!)Password
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=53101
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/https/aspnetapp.pfx
+    volumes:
+      - ${HOME}/.aspnet/https/aspnetapp.pfx:/app/https/aspnetapp.pfx:ro
+    depends_on:
+      - time-entries-db
+  time-entries-db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - 53001:1433
+    environment:
+      - SA_PASSWORD=yourStrong(!)Password
+      - ACCEPT_EULA=Y
+    volumes:
+      - ./data/TimeEntries.Api/data:/var/opt/mssql/data
+      - ./data/TimeEntries.Api/log:/var/opt/mssql/log
+      - ./data/TimeEntries.Api/secrets:/var/opt/mssql/secrets

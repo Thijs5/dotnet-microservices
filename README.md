@@ -11,17 +11,23 @@ Trying to setup multiple connected microservices. All commands noted below are e
 - [Timesheetr](#timesheetr)
     - [Users](#users)
     - [Projects](#projects)
-    - [TimeEntry](#timeentry)
+    - [TimeEntries](#timeentries)
 
 ## Overview
 
 ![Services overview](./assets/readme/services.png "Services overview")
 
-| Service | Ports | Healthcheck | Swagger |
-| ------- | ----- | ---------- | ------- |
-| [Users API](#users-api) | 51xxx | [Healthcheck](https://localhost:51101) | [Swagger](https://localhost:51101/swagger/index.html) |
-| [Projects API](#projects-api) | 52xxx | [Healthcheck](https://localhost:52101) | [Swagger](https://localhost:52101/swagger/index.html) |
-| [TimeEntries API](#projects-api) | 53xxx | [Healthcheck](https://localhost:53101) | [Swagger](https://localhost:53101/swagger/index.html) |
+| API | Ports | Healthcheck | Swagger |
+| --- | ----- | ---------- | ------- |
+| [Users API](#users-api) | `51xxx` | [Healthcheck](https://localhost:51101) | [Swagger](https://localhost:51101/swagger/index.html) |
+| [Projects API](#projects-api) | `52xxx` | [Healthcheck](https://localhost:52101) | [Swagger](https://localhost:52101/swagger/index.html) |
+| [TimeEntries API](#projects-api) | `53xxx` | [Healthcheck](https://localhost:53101) | [Swagger](https://localhost:53101/swagger/index.html) |
+
+| SQL | ConnectionString |
+| --- | ---------------- |
+| Users DB | `Server=users-db;Database=UsersDb;User Id=sa;Password=yourStrong(!)Password` |
+| Projects DB | `Server=projects-db;Database=ProjectsDb;User Id=sa;Password=yourStrong(!)Password` |
+| TimeEntries DB | `Server=time-entries-db;Database=TimeEntriesDb;User Id=sa;Password=yourStrong(!)Password` |
 
 ## The First Microservice
 
@@ -47,7 +53,7 @@ The Users Api will store user data. We'll be using a combination of [Entity Fram
 After configuring EF and setting up the CRUD actions in the controllers, we still need to create the database and migrations. Open a terminal window and paste the commands below.
 ```shell
 dotnet tool install --global dotnet-ef
-dotnet ef migrations add CreateUsersDB --project ./src/Users.Api/Users.Api.csproj 
+dotnet ef migrations add CreateUsersDB --project ./src/Users.Api/Users.Api.csproj
 ```
 The first commands installs the EF tools needed to run migrations. If they are already installed, you can skip this command. The second one will migrate the database to a version that corresponds with how it is configured in the code. After running the `dotnet ef migrations`-command, notice there is a Migrations-folder added to the project.
 
