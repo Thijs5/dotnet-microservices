@@ -101,7 +101,7 @@ The application we're creating is a timesheet application. In our application we
 The Users microservice is the service we've just created. Except for some port changes, this service is already finished. This service only manages the users object. Some simple CRUD actions are enough.
 
 ### Projects
-The Projects microservice manages projects on which users can record time. This service will not only do some simple CRUD-actions, but should also add Users to a project. Some communication to the Users service will be needed.
+The Projects microservice manages projects on which users can record time. This service will not only do some simple CRUD-actions, but should also add Users to a project. Some communication to the Users service will be needed. A first CRUD setup (without communication to other services) can be found in [commit e85f2d0](https://github.com/Thijs5/dotnet-microservices/commit/e85f2d0be67185419c0cee930a7cc2d50f76897c).
 
 ### Time Entries
 TimeEntries will consist of a user, a project, and some time data. This service needs to communicate with both the users and the projects service.
