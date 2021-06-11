@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Users.Api.Persistence;
-using Users.Api.HealthChecks;
+using Projects.Api.Persistence;
+using Projects.Api.HealthChecks;
 
-namespace Users.Api
+namespace Projects.Api
 {
     public static class ServicesConfiguration
     {
@@ -20,7 +20,7 @@ namespace Users.Api
         private static IServiceCollection ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("Default");
-            services.AddDbContext<UsersDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<ProjectsDbContext>(options => options.UseSqlServer(connectionString));
 
             return services;
         }
@@ -28,7 +28,7 @@ namespace Users.Api
         private static IServiceCollection ConfigureHealthChecks(this IServiceCollection services)
         {
             services.AddHealthChecks()
-		        .AddCheck<PendingDbMigrationHealthCheck<UsersDbContext>>("db-migration-check");
+		        .AddCheck<PendingDbMigrationHealthCheck<ProjectsDbContext>>("db-migration-check");
 
             return services;
         }

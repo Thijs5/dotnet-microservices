@@ -10,16 +10,16 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["src/Users.Api/Users.Api.csproj", "./"]
-RUN dotnet restore "Users.Api.csproj"
-COPY ./src/Users.Api ./src
+COPY ["src/Projects.Api/Projects.Api.csproj", "./"]
+RUN dotnet restore "Projects.Api.csproj"
+COPY ./src/Projects.Api ./src
 WORKDIR "/src/."
-RUN dotnet build "Users.Api.csproj" -c Release -o /app/build
+RUN dotnet build "Projects.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Users.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "Projects.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Users.Api.dll"]
+ENTRYPOINT ["dotnet", "Projects.Api.dll"]

@@ -1,5 +1,3 @@
-# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
-
 version: '3.4'
 
 services:
@@ -9,24 +7,24 @@ services:
       context: .
       dockerfile: src/Users.Api/Dockerfile
     ports:
-      - 5001:443
-      - 50010:80
+      - 51100:80
+      - 51101:443
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - SQL_CONNECTION_STRING=Server=users-db;Database=UsersDb;User Id=sa;Password=yourStrong(!)Password
+      - SQLCONNSTR_DEFAULT=Server=users-db;Database=UsersDb;User Id=sa;Password=yourStrong(!)Password
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_HTTPS_PORT=5001
+      - ASPNETCORE_HTTPS_PORT=51101
       - ASPNETCORE_Kestrel__Certificates__Default__Password=Password
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/https/aspnetapp.pfx
     volumes:
       - ${HOME}/.aspnet/https/aspnetapp.pfx:/app/https/aspnetapp.pfx:ro
     depends_on:
       - users-db
-
+  
   users-db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     ports:
-      - 1433:1433
+      - 51001:1433
     environment:
       - SA_PASSWORD=yourStrong(!)Password
       - ACCEPT_EULA=Y
@@ -34,3 +32,35 @@ services:
       - ./data/Users.Api/data:/var/opt/mssql/data
       - ./data/Users.Api/log:/var/opt/mssql/log
       - ./data/Users.Api/secrets:/var/opt/mssql/secrets
+
+  projects-api:
+    image: projects-api
+    build:
+      context: .
+      dockerfile: src/Projects.Api/Dockerfile
+    ports:
+      - 52100:80
+      - 52101:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - SQLCONNSTR_DEFAULT=Server=projects-db;Database=ProjectsDb;User Id=sa;Password=yourStrong(!)Password
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=52101
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/https/aspnetapp.pfx
+    volumes:
+      - ${HOME}/.aspnet/https/aspnetapp.pfx:/app/https/aspnetapp.pfx:ro
+    depends_on:
+      - projects-db
+
+  projects-db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - 52001:1433
+    environment:
+      - SA_PASSWORD=yourStrong(!)Password
+      - ACCEPT_EULA=Y
+    volumes:
+      - ./data/Projects.Api/data:/var/opt/mssql/data
+      - ./data/Projects.Api/log:/var/opt/mssql/log
+      - ./data/Projects.Api/secrets:/var/opt/mssql/secrets

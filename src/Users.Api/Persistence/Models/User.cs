@@ -8,12 +8,12 @@ namespace Users.Api.Persistence.Models
     public class User
     {
         /// <summary>
-        /// Internal Id used for joins etc.
+        /// Unique id of the user.
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Comment("Internal id (only used for joins, etc.).")]
-        public int Id { get; set; }
+        [Comment("Unique id of the user.")]
+        public int Id { get; set; } = 0;
 
         /// <summary>
         /// First name.
@@ -21,7 +21,7 @@ namespace Users.Api.Persistence.Models
         [Required]
         [MaxLength(255)]
         [Comment("First name of the user.")]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = null!;
 
         /// <summary>
         /// Last name.
@@ -29,6 +29,6 @@ namespace Users.Api.Persistence.Models
         [Required]
         [MaxLength(255)]
         [Comment("Last name of the user.")]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = null!;
     }
 }

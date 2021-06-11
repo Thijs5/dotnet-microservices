@@ -7,7 +7,6 @@ namespace Users.Api.Models
         /// <summary>
         /// First name.
         /// </summary>
-        /// <value></value>
         [Required]
         [MaxLength(255)]
         public string FirstName { get; init; } = string.Empty;
@@ -15,7 +14,6 @@ namespace Users.Api.Models
         /// <summary>
         /// Family name.
         /// </summary>
-        /// <value></value>
         [Required]
         [MaxLength(255)]
         public string FamilyName { get; init; } = string.Empty;

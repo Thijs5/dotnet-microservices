@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Users.Api.Persistence;
+using Projects.Api.Persistence;
 
-namespace Users.Api
+namespace Projects.Api
 {
     public class Program
     {

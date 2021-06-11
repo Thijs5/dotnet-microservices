@@ -7,21 +7,18 @@ namespace Users.Api.Models
         /// <summary>
         /// Unique id of the user.
         /// </summary>
-        /// <value></value>
         [Required]
         public int Id { get; init; }
 
         /// <summary>
         /// First name.
         /// </summary>
-        /// <value></value>
         [Required]
         public string FirstName { get; init; } = string.Empty;
 
         /// <summary>
         /// Family name.
         /// </summary>
-        /// <value></value>
         [Required]
         public string FamilyName { get; init; } = string.Empty;
     }

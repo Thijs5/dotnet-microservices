@@ -1,21 +1,31 @@
 # dotnet-microservices
-Trying to setup multiple connected microservices. All commands noted below are executed in the root project directory. This guide currently contains
-- [Creating a WebApi](#users-api)
-- [Setting up Visual Studio Code for debugging](#setting-up-visual-studio-code)
-- [Fetching and updating data using Entity Framework](#using-entity-framework)
-- Docker
-    - [WebApi](#Dockerize-users-api)
-    - [SQL Server](#dockerize-sql-server)
+Trying to setup multiple connected microservices. All commands noted below are executed in the root project directory. This guide currently contains:
+- [Overview](#overview)
+- [The First Microservice](#the-first-microservice)
+    - [Creating a WebApi](#web-api)
+    - [Setting up Visual Studio Code for debugging](#setting-up-visual-studio-code)
+    - [Fetching and updating data using Entity Framework](#using-entity-framework)
+    - [Docker](#docker)
+        - [WebApi](#Dockerize-users-api)
+        - [SQL Server](#dockerize-sql-server)
+- [Timesheetr](#timesheetr)
+    - [Users](#users)
+    - [Projects](#projects)
+    - [TimeEntry](#timeentry)
 
 ## Overview
 
 ![Services overview](./assets/readme/services.png "Services overview")
 
-| Service | URL |
-| ------- | --- |
-| [Users API](#users-api) | [https://localhost:5001/swagger/index.html](https://localhost:5001/swagger/index.html) <br/> [http://localhost:50010/swagger/index.html](http://localhost:50010/swagger/index.html) |
+| Service | Ports | Healthcheck | Swagger |
+| ------- | ----- | ---------- | ------- |
+| [Users API](#users-api) | 51xxx | [Healthcheck](https://localhost:51101) | [Swagger](https://localhost:51101/swagger/index.html) |
+| [Projects API](#projects-api) | 52xxx | [Healthcheck](https://localhost:52101) | [Swagger](https://localhost:52101/swagger/index.html) |
+| [TimeEntries API](#projects-api) | 53xxx | [Healthcheck](https://localhost:53101) | [Swagger](https://localhost:53101/swagger/index.html) |
 
-## Users API
+## The First Microservice
+
+### Web API
 Let's create the first API. The first microservice is all about users. Paste the commands below in the command line to create the project.
 
 ```shell
@@ -83,3 +93,15 @@ To let the Users API communicate with SQL Server, we also need to create a conta
 Normally the EF migrations run on startup. Because of the Docker setup, it is possible the SQL container isn't ready yet at the moment the API setups. To fix this quick and dirty, I've added a migration controller. By using this controller it is possible to migrate the database manually ([commit 8fbcd38](https://github.com/Thijs5/dotnet-microservices/commit/8fbcd38191ba0f2db74e50371739081d05c1c3a2)).
 
 At this point we have a working SQL container. There is only one problem with it. If the container gets deleted, we lose all our data. To counter this, we will mount a volume to the container. This was the data will get saved on our host machine in stead of the container ([commit 8abf5ca](https://github.com/Thijs5/dotnet-microservices/commit/8abf5ca9d11551e429715fafda5e2667d10756b2)).
+
+## Timesheetr
+The application we're creating is a timesheet application. In our application we have three aggregate roots: **Users**, **Projects**, and **TimeEntries**. Every day a User must complete a timesheet with **TimeEntries** to record on which **Projects** (s)he has worked today.  Not every **User** can contribute to every **Project**, they need to be added.
+
+### Users
+The Users microservice is the service we've just created. Except for some port changes, this service is already finished. This service only manages the users object. Some simple CRUD actions are enough.
+
+### Projects
+The Projects microservice manages projects on which users can record time. This service will not only do some simple CRUD-actions, but should also add Users to a project. Some communication to the Users service will be needed.
+
+### Time Entries
+TimeEntries will consist of a user, a project, and some time data. This service needs to communicate with both the users and the projects service.
