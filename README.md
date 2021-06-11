@@ -110,4 +110,4 @@ The Users microservice is the service we've just created. Except for some port c
 The Projects microservice manages projects on which users can record time. This service will not only do some simple CRUD-actions, but should also add Users to a project. Some communication to the Users service will be needed. A first CRUD setup (without communication to other services) can be found in [commit e85f2d0](https://github.com/Thijs5/dotnet-microservices/commit/e85f2d0be67185419c0cee930a7cc2d50f76897c).
 
 ### Time Entries
-TimeEntries will consist of a user, a project, and some time data. This service needs to communicate with both the users and the projects service.
+TimeEntries will consist of a user, a project, and some time data. This service needs to communicate with both the users and the projects service. A first CRUD setup (without communication to other services) can be found in [commit 0273ce1](https://github.com/Thijs5/dotnet-microservices/commit/0273ce18ca10b615cd35b2b2f62e1a94975d0abe).
